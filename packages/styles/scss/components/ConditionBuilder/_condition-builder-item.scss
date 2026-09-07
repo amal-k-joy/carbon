@@ -12,10 +12,10 @@
 @use '../../theme' as *;
 @use '../../type' as *;
 @use '../../spacing' as *;
-@use '@carbon/styles/scss/motion' as *;
-@use '@carbon/styles/scss/utilities';
-@use '@carbon/styles/scss/utilities/focus-outline';
-@use '@carbon/styles/scss/colors' as *;
+@use '../../motion' as *;
+@use '../../utilities';
+@use '../../utilities/focus-outline';
+@use '../../colors' as *;
 
 @mixin _actions-animation($translateValue) {
   z-index: -1;
