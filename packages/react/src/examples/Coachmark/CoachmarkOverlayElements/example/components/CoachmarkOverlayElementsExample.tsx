@@ -11,7 +11,7 @@ import {
   preview__CoachmarkBeacon as CoachmarkBeacon,
   preview__Coachmark as Coachmark,
 } from '@carbon/ibm-products';
-import { initCarousel } from '@carbon/utilities';
+import { InitCarousel, initCarousel } from '@carbon/utilities';
 import sampleImage from '../assets/sample-image.png';
 
 //fetching theme
@@ -65,8 +65,8 @@ export const CoachmarkOverlayElementsExample = (args) => {
   const beaconButtonRef = useRef<HTMLButtonElement>(null);
   const [currentViewIndex, setCurrentViewIndex] = useState(-1);
   const [lastViewIndex, setLastViewIndex] = useState(-1);
-  const carouselContainerRef = useRef(null);
-  const carouselInit = useRef(null);
+  const carouselContainerRef = useRef<HTMLDivElement | null>(null);
+  const carouselInit = useRef<InitCarousel | null>(null);
   const carouselItemsRef = useRef<(HTMLDivElement | null)[]>([]);
   const items = [
     {
@@ -95,19 +95,22 @@ export const CoachmarkOverlayElementsExample = (args) => {
   };
 
   useEffect(() => {
-    if (carouselContainerRef && carouselContainerRef.current) {
-      carouselInit.current = initCarousel(carouselContainerRef.current, {
-        onViewChangeStart: onViewChangeStart,
-        onViewChangeEnd: onViewChangeEnd,
+    const activeCarouselContainer = carouselContainerRef.current;
+    if (isOpen && activeCarouselContainer) {
+      // Destroy stale event listeners from the previous instance before
+      // re-initializing, otherwise old transitionend listeners fire with a
+      // stale viewIndexStack and reset currentViewIndex back to 0.
+      setCurrentViewIndex(0);
+      setLastViewIndex(0);
+      carouselInit.current?.destroyEvents?.();
+      carouselInit.current = initCarousel(activeCarouselContainer, {
+        onViewChangeStart: () => {},
+        onViewChangeEnd: (options) => handleViewStackUpdate(options),
+        useMaxHeight: true,
       });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [carouselInit, isOpen]);
-
-  const onViewChangeStart = () => {};
-  const onViewChangeEnd = (options) => {
-    handleViewStackUpdate(options);
-  };
 
   const updateCarouselItemsTabIndex = useCallback((activeIndex: number) => {
     carouselItemsRef.current.forEach((item, idx) => {
@@ -153,7 +156,7 @@ export const CoachmarkOverlayElementsExample = (args) => {
   };
   return (
     <Theme theme={carbonTheme}>
-      <main>
+      <div className="coachmark-overlay-elements-example">
       <Coachmark
         position={{ x: 151, y: 155 }}
         open={isOpen}
@@ -241,7 +244,7 @@ export const CoachmarkOverlayElementsExample = (args) => {
           </Coachmark.ContentBody>
         </Coachmark.Content>
       </Coachmark>
-      </main>
+      </div>
     </Theme>
   );
 };

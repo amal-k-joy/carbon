@@ -1,20 +1,29 @@
 {
-  "name": "ibm-products-coachmark-stacked-pattern-example",
-  "version": "0.1.0",
-  "private": true,
-  "description": "Sample project for getting started with the CoachmarkStacked pattern using Carbon for IBM Products",
+  "name": "coachmark-stacked-pattern-example",
+  "description": "An example showing use of the CoachmarkStacked pattern from @carbon/react and @carbon/ibm-products.",
+  "keywords": [
+    "carbon",
+    "ibm",
+    "ibm-products",
+    "pattern",
+    "coachmark",
+    "coachmark-stacked",
+    "onboarding"
+  ],
   "license": "Apache-2.0",
-  "main": "index.html",
   "type": "module",
   "scripts": {
-    "build": "vite build",
     "dev": "vite",
+    "build": "vite build",
     "preview": "vite preview"
   },
   "dependencies": {
     "@carbon/ibm-products": "latest",
     "@carbon/react": "latest",
+    "@carbon/styles": "latest",
     "@carbon/utilities": "latest",
+    "@ibm/plex": "latest",
+    "classnames": "latest",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "sass": "^1.93.2"
@@ -22,7 +31,19 @@
   "devDependencies": {
     "@types/react": "^19.1.8",
     "@types/react-dom": "^19.1.6",
-    "@vitejs/plugin-react": "^5.0.0",
+    "@vitejs/plugin-react": "^4.2.1",
     "vite": "^8.0.0"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }

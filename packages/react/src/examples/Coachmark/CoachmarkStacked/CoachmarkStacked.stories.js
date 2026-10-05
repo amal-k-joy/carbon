@@ -6,24 +6,25 @@
  */
 
 import React from 'react';
-import './_story-styles.scss';
 import DocsPage from './CoachmarkStacked.mdx';
 import { CoachmarkStackedExample } from './example/components/CoachmarkStackedExample';
+import './example/styles/_coachmark-stacked.scss';
+import './example/styles/_story-styles.scss';
 
 export default {
   title: 'Examples/Coachmark/Coachmark Stacked',
   component: () => {},
   tags: ['autodocs'],
   parameters: {
+    layout: 'fullscreen',
     docs: {
       page: DocsPage,
     },
   },
 };
 
-const CoachmarkStackedPattern = (args) => {
-  return <CoachmarkStackedExample {...args} prefix='c4p' />;
+export const CoachmarkStack = (args) => {
+  return <CoachmarkStackedExample {...args} />;
 };
-
-export const CoachmarkStack = CoachmarkStackedPattern.bind({});
+CoachmarkStack.storyName = 'Coachmark stacked';
 CoachmarkStack.args = {};

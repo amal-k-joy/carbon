@@ -6,9 +6,9 @@
  */
 
 import React from 'react';
-import './_story-styles.scss';
 import DocsPage from './CoachmarkFixed.mdx';
 import { CoachmarkFixedExample } from './example/components/CoachmarkFixedExample';
+import './example/styles/_coachmark-fixed.scss';
 
 export default {
   title: 'Examples/Coachmark/Coachmark Fixed',
